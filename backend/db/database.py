@@ -1,7 +1,7 @@
 import sqlite3
 import hashlib
 import secrets
-from .models import Car
+from db.models import Car, User
 
 def register_user(username, password):
     conn = sqlite3.connect("car_booking.db")
