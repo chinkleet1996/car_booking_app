@@ -3,6 +3,14 @@ from api.models import Car, User
 from db.database import authenticate_api_key, register_user, login_user, get_available_cars, book_car, get_user_bookings
 
 app = Flask(__name__)
+@app.route('/authenticate', methods=['POST'])
+def authenticate():
+    data = request.json
+    api_key = data.get('api_key')
+    if authenticate_api_key(api_key):
+        return jsonify({"message": "API key is valid"}), 200
+    else:
+        return jsonify({"message": "Invalid API key"}), 401
 
 @app.route("/register", methods=["POST"])
 def register():

@@ -3,6 +3,12 @@ import hashlib
 import secrets
 from db.models import Car, User
 
+def authenticate_api_key(api_key):
+    for user in users:
+        if user.get("api_key") == api_key:
+            return True
+    return False
+
 def register_user(username, password):
     conn = sqlite3.connect("car_booking.db")
     cur = conn.cursor()
