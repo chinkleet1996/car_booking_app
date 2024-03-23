@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-from .models import Car, User
-from ..db.database import authenticate_api_key, register_user, login_user, get_available_cars, book_car, get_user_bookings
+from api.models import Car, User
+from db.database import authenticate_api_key, register_user, login_user, get_available_cars, book_car, get_user_bookings
 
 app = Flask(__name__)
 
