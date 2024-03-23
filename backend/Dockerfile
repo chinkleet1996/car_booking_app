@@ -10,6 +10,9 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Upgrade Flask and Werkzeug to compatible versions
+RUN pip install --no-cache-dir Flask==2.1.0 Werkzeug==2.0.2
+
 # Copy all files
 COPY . .
 
