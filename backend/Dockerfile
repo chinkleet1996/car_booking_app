@@ -1,21 +1,22 @@
-# Use the latest Python slim image as a base
+# Use Python 3.9 slim image as a base
 FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /usr/src/app
+
+# Update package list and install required dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.9 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.9 as the default Python version
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
 
 # Copy requirements file
 COPY requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Upgrade Python (optional)
-RUN apt-get update && apt-get install -y --no-install-recommends python3.9 && \
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
-
-# Upgrade Werkzeug (optional)
-RUN pip install --no-cache-dir --upgrade Werkzeug
 
 # Copy all files
 COPY . .
