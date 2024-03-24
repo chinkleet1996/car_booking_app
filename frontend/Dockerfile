@@ -11,7 +11,7 @@ COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install react-scripts@4.0.3
 
 # Copy the rest of the frontend files
-COPY frontend ./
+COPY frontend/ ./
 
 # Build the frontend
 RUN npm run build
