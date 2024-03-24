@@ -2,7 +2,7 @@
 FROM node:14 as frontend_build
 
 # Set working directory
-WORKDIR /app/frontend
+WORKDIR /app
 
 # Copy package.json and package-lock.json to install dependencies
 COPY frontend/package.json frontend/package-lock.json ./
@@ -22,7 +22,7 @@ RUN npm run build
 FROM nginx:latest
 
 # Copy built assets from the first stage to NGINX server's HTML directory
-COPY --from=frontend_build /app/frontend/build /usr/share/nginx/html
+COPY --from=frontend_build /app/build /usr/share/nginx/html
 
 # Copy NGINX configuration file
 COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
