@@ -32,6 +32,7 @@ services:
     volumes:
       - ./frontend/build:/usr/share/nginx/html
       - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./frontend/build/static:/usr/share/nginx/html/static  # Bind the static files directory
     depends_on:
       - frontend
     networks:
@@ -40,4 +41,3 @@ services:
 networks:
   car_booking_network:
     driver: bridge
-
