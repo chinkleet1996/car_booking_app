@@ -19,8 +19,14 @@ RUN npm run build
 # Stage 2: Serve frontend assets with NGINX
 FROM nginx:latest
 
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
 # Copy built assets from the first stage to NGINX server's HTML directory
-COPY --from=frontend_build /app/build /usr/share/nginx/html
+COPY --from=frontend_build /app/build ./
+
+# Set permissions for static files
+RUN chown -R nginx:nginx /usr/share/nginx/html
 
 # Copy NGINX configuration file from the same directory
 COPY nginx.conf /etc/nginx/conf.d/default.conf
